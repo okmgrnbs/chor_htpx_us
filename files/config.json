@@ -1,0 +1,78 @@
+{
+  "log": {
+     "access":"/dev/null",
+     "error":"/dev/null",
+     "loglevel":"none"
+  },
+  "inbounds": [
+    {
+      "port": 13528,
+      "protocol": "vless",
+      "tag": "vless-xhttp-in",
+      "listen": "::",
+      "settings": {
+        "decryption": "none",
+        "clients": [
+          {
+            "id": "d25a9d67-8cc1-4361-b985-85c1e1102993"
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "xhttpSettings": {
+          "mode": "auto",
+          "path": "/sxhtp",
+          "method": "PUT",
+          "headers": {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            "Accept-Language": "en-US,en;q=0.9",
+            "Accept-Encoding": "gzip, deflate, br",
+            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+            "sec-ch-ua": "\"Not_A Brand\";v=\"8\", \"Chromium\";v=\"120\", \"Google Chrome\";v=\"120\"",
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": "\"Windows\"",
+            "sec-fetch-dest": "document",
+            "sec-fetch-mode": "navigate",
+            "sec-fetch-site": "none",
+            "sec-fetch-user": "?1",
+            "Connection": "keep-alive",
+            "Upgrade-Insecure-Requests": "1"
+          }
+        }
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "direct",
+      "protocol": "freedom",
+      "settings": {}
+    },
+    {
+      "tag": "blocked",
+      "protocol": "blackhole",
+      "settings": {}
+    },
+    {
+      "tag": "dns-out",
+      "protocol": "dns"
+    }
+  ],
+  "dns": {
+    "servers": [
+      "8.8.8.8",
+      "1.1.1.1"
+    ]
+  },
+  "routing": {
+    "domainStrategy": "AsIs",
+    "rules": [
+      {
+        "type": "field",
+        "protocol": ["dns"],
+        "outboundTag": "dns-out"
+      }
+    ]
+  }
+}
